@@ -1,0 +1,8 @@
+C:\Users\erkan\Desktop\Projects\smart-doc-assistant\server\DocAssistant.Api\obj\Debug\net8.0\DocAssistant.Api.csproj.AssemblyReference.cache
+C:\Users\erkan\Desktop\Projects\smart-doc-assistant\server\DocAssistant.Api\obj\Debug\net8.0\DocAssistant.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\erkan\Desktop\Projects\smart-doc-assistant\server\DocAssistant.Api\obj\Debug\net8.0\DocAssistant.Api.AssemblyInfoInputs.cache
+C:\Users\erkan\Desktop\Projects\smart-doc-assistant\server\DocAssistant.Api\obj\Debug\net8.0\DocAssistant.Api.AssemblyInfo.cs
+C:\Users\erkan\Desktop\Projects\smart-doc-assistant\server\DocAssistant.Api\obj\Debug\net8.0\DocAssistant.Api.csproj.CoreCompileInputs.cache
+C:\Users\erkan\Desktop\Projects\smart-doc-assistant\server\DocAssistant.Api\obj\Debug\net8.0\DocAssistant.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\erkan\Desktop\Projects\smart-doc-assistant\server\DocAssistant.Api\obj\Debug\net8.0\DocAssistant.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\erkan\Desktop\Projects\smart-doc-assistant\server\DocAssistant.Api\obj\Debug\net8.0\DocAssistant.Api.sourcelink.json
