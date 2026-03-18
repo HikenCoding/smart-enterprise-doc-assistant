@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DocAssistant.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+95ac3cada024d58f3e53743070623aa3446264d6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+79c0a7c4cc231b4061264957b7cce1e47e9f55c0")]
 [assembly: System.Reflection.AssemblyProductAttribute("DocAssistant.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DocAssistant.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

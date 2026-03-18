@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "zjr8SGjA7f45yuxl1KEzRifwpUehNUX+wAKn3jESLeI=",
+  "Source": "DocAssistant.Api",
+  "BasePath": "_content/DocAssistant.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
