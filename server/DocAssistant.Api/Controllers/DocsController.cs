@@ -55,11 +55,32 @@ namespace DocAssistant.Api.Controllers
         }
 
         [HttpPost("ask")]
-        public async Task<IActionResult> Ask([FromBody] ChatRequest request)
-        {
-            // Hier kommt deine Ask-Logik rein...
-            return Ok("KI antwortet bald");
-        }
+public async Task<IActionResult> Ask([FromBody] ChatRequest request)
+{
+    if (string.IsNullOrEmpty(request.Question))
+    {
+        return BadRequest("Frage darf nicht leer sein, Bro.");
+    }
+
+    // 1. Den Pfad zur PDF bestimmen
+    var fileName = request.FileName ?? "vertrag_max_mustermann.pdf";
+    var path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "test-data", fileName);
+
+    if (!System.IO.File.Exists(path))
+    {
+        return NotFound($"Die Datei {fileName} wurde im test-data Ordner nicht gefunden.");
+    }
+
+    // 2. Text aus der PDF extrahieren (via DocumentService)
+    // Hinweis: Wir nehmen hier der Einfachheit halber die erste Datei oder die spezifische
+    var pdfText = _documentService.GetTextFromPdf(path);
+
+    // 3. Abfrage an Ollama senden (via ChatService)
+    var response = await _chatService.AskQuestion(pdfText, request.Question);
+
+    // 4. Die echte Antwort von Ollama zurückgeben
+    return Ok(new { answer = response });
+}
     }
 
     // Das Model muss AUẞERHALB der Controller-Klasse, aber innerhalb des Namespaces stehen
