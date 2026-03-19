@@ -46,7 +46,7 @@ public class ChatService
             using var jsonDoc = JsonDocument.Parse(responseString);
             if (jsonDoc.RootElement.TryGetProperty("response", out var responseElement))
             {
-                return responseElement.GetString();
+                return response?.Response ?? "Entschuldigung, ich konnte keine Antwort generieren.";
             }
             else
             {
