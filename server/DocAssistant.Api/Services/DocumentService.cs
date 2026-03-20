@@ -4,12 +4,14 @@ using UglyToad.PdfPig;
 
 public class DocumentService
 {
+    //Verwandelt die PDF-Datei in einen Text-String, damit die KI ihn verstehen kann.
     public string GetTextFromPdf(string filePath)
     {
         if (string.IsNullOrWhiteSpace(filePath))
             return string.Empty;
         try
         {
+            //endloser Notizzettel. Der Computer schickt sehr schnell und effizient ganz viele Textstücke hintereinander.
             var sb = new StringBuilder();
             using (var document = PdfDocument.Open(filePath))
             {
@@ -22,7 +24,6 @@ public class DocumentService
         }
         catch (Exception ex)
         {
-            // Log error or handle it appropriately
             return $"Fehler beim Auslesen der PDF: {ex.Message}";
         }
     }
