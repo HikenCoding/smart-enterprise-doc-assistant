@@ -3,27 +3,34 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
+//Alles was in dieser Datei ist, gehört zu dieser Adresse
 namespace DocAssistant.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class DocsController : ControllerBase
     {
+        //PDF Spezialst 
         private readonly DocumentService _documentService;
+        //KI Spezialist
         private readonly ChatService _chatService;
 
+
+        //Konstruktor wird erstellt und documentService sowie chatService werden hier aufgerufen und gespeichert
         public DocsController(DocumentService documentService, ChatService chatService)
         {
             _documentService = documentService;
             _chatService = chatService;
         }
 
+        //Wie eine Klingel an der Haustür. Angular schickt Nachricht an 'api/docs'ask' und Methode arbeitet
         [HttpGet("scan")]
         public IActionResult Scan()
         {
+            //Pdf wird ausgelesen
             var path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "test-data");
-            // Hier kommt deine Scan-Logik rein...
-            // 1. Pfad zum Ordner '../../test-data' definieren (relative zum Working Directory)
+            
+            
             var testDataPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "test-data");
 
             // 2. Ordner anlegen, falls nicht vorhanden
@@ -54,12 +61,13 @@ namespace DocAssistant.Api.Controllers
             return Ok(resultList);
         }
 
+        //Benutzer stellt eine Anfrage zu einer PDF
         [HttpPost("ask")]
 public async Task<IActionResult> Ask([FromBody] ChatRequest request)
 {
     if (string.IsNullOrEmpty(request.Question))
     {
-        return BadRequest("Frage darf nicht leer sein, Bro.");
+        return BadRequest("Frage darf nicht leer sein, Bro");
     }
 
     // 1. Den Pfad zur PDF bestimmen
@@ -72,13 +80,12 @@ public async Task<IActionResult> Ask([FromBody] ChatRequest request)
     }
 
     // 2. Text aus der PDF extrahieren (via DocumentService)
-    // Hinweis: Wir nehmen hier der Einfachheit halber die erste Datei oder die spezifische
     var pdfText = _documentService.GetTextFromPdf(path);
 
-    // 3. Abfrage an Ollama senden (via ChatService)
+    // 3. Abfrage wird an Ollama gesendet (mittels ChatService)
     var response = await _chatService.AskQuestion(pdfText, request.Question);
 
-    // 4. Die echte Antwort von Ollama zurückgeben
+    // 4. Antwort der KI wird verpackt und an Angular gesendet.
     return Ok(new { answer = response });
 }
     }
