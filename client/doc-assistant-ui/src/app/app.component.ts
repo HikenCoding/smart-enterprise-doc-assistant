@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Wichtig für [ngClass]
 import { FormsModule } from '@angular/forms'; // Wichtig für [(ngModel)]
-import { ApiService } from './api.service';
+import { ApiService } from './api.service'; // der eigene Service von mir der HTTP-Anfragen ans Backend schickt
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, FormsModule], // Diese beiden müssen hier stehen!
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  selector: 'app-root', //HTML Tag, dass diese Komponente repräsentiert
+  standalone: true, //Moderne Angular Variante ohne Module
+  imports: [CommonModule, FormsModule], // Dadurch dass es Standalone ist, muss man angeben, was es braucht
+  templateUrl: './app.component.html', //Verknüpft das HTML-Template
+  styleUrl: './app.component.scss' //Verknüpft die SCSS-Datei
 })
 export class AppComponent {
   documents: any[] = [];
@@ -16,13 +16,13 @@ export class AppComponent {
   currentQuestion: string = '';
   loading: boolean = false;
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService) {} //Injiziert den ApiService automatisch. 'api' Variable ist nur in dieser Klasse sichtbar
 
   loadDocs() {
-    this.api.scanDocuments().subscribe({
-      next: (data) => {
-        this.documents = data;
-        console.log('Docs geladen:', data);
+    this.api.scanDocuments().subscribe({ //ruft meinen Backend die Methode 'scanDocuments' auf und mit subscribe startet den HTTP-Request
+      next: (data) => { //'next wird ausgeführt, wenn Daten zurückkommen
+        this.documents = data; //Die Daten werden in documents gespeichert
+        console.log('Docs geladen:', data); //Anzeige in der Console, das Dokumente geladen wurden. Damit man auch debuggen kann und sieht was ankommt.
       },
       error: (err) => console.error('Fehler beim Scannen:', err)
     });

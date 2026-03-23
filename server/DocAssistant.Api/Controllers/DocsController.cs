@@ -23,7 +23,7 @@ namespace DocAssistant.Api.Controllers
             _chatService = chatService;
         }
 
-        //Wie eine Klingel an der Haustür. Angular schickt Nachricht an 'api/docs'ask' und Methode arbeitet
+        //sucht alle pdf dateien im Pfad und gibt diese mit Inhalt und Namen als Liste zurück mit einer "Ok" Meldung.
         [HttpGet("scan")]
         public IActionResult Scan()
         {
@@ -61,7 +61,7 @@ namespace DocAssistant.Api.Controllers
             return Ok(resultList);
         }
 
-        //Benutzer stellt eine Anfrage zu einer PDF
+        //Benutzer stellt eine Anfrage zu einer PDF und eine Meldung 'Ok' wird zurückgegben mit 
         [HttpPost("ask")]
 public async Task<IActionResult> Ask([FromBody] ChatRequest request)
 {
@@ -74,6 +74,7 @@ public async Task<IActionResult> Ask([FromBody] ChatRequest request)
     var fileName = request.FileName ?? "vertrag_max_mustermann.pdf";
     var path = Path.Combine(Directory.GetCurrentDirectory(), "..", "..", "test-data", fileName);
 
+    //Abfrage, ob Datei im Pfad existiert. Wenn nicht wird die Methode abgebrochen mit einer Meldung.
     if (!System.IO.File.Exists(path))
     {
         return NotFound($"Die Datei {fileName} wurde im test-data Ordner nicht gefunden.");
@@ -85,7 +86,7 @@ public async Task<IActionResult> Ask([FromBody] ChatRequest request)
     // 3. Abfrage wird an Ollama gesendet (mittels ChatService)
     var response = await _chatService.AskQuestion(pdfText, request.Question);
 
-    // 4. Antwort der KI wird verpackt und an Angular gesendet.
+    // 4. Antwort der KI wird verpackt und an Angular gesendet als Anonymes Objekt. Anonymes Objekt wird in JSON umgewandelt.
     return Ok(new { answer = response });
 }
     }
